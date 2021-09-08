@@ -29,7 +29,8 @@ const AddPost = () => {
 
   const handlePostSubmit = (data) => {
     data.preventDefault();
-    const allData = { ...postData, imgUrl: imageURL };
+    const date = new Date().toLocaleString();
+    const allData = { ...postData, imgUrl: imageURL, date:date };
     console.log(allData);
     const url = `https://intense-fjord-22962.herokuapp.com/addPost`;
     fetch(url, {
@@ -72,6 +73,7 @@ const AddPost = () => {
     const insertTitleItem = { ...postData, title: e.target.value };
     setPostData(insertTitleItem);
   };
+  
   return (
     <div id="admin-content">
       <div class="container">

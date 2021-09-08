@@ -15,6 +15,8 @@ import Signup from "./Signup/Signup";
 
 import SuperAdmin from "./SuperAdmin/SuperAdmin";
 import AdminLogin from "./AdminLogin/AdminLogin";
+import PostDetails from "./PostDetails/PostDetails";
+import PrivateRouteInternational from "./PrivateRouteInternational/privateInternational";
 export const userContext = createContext();
 
 const Client = () => {
@@ -32,9 +34,12 @@ const Client = () => {
         <Route path="/business">
           <Business />
         </Route>
-        <PrivateRoute path="/international">
+        <Route path="/postDetails/:postId">
+          <PostDetails />
+        </Route>
+        <PrivateRouteInternational path="/international">
           <International />
-        </PrivateRoute>
+        </PrivateRouteInternational>
         <Route path="/national">
           <National />
         </Route>

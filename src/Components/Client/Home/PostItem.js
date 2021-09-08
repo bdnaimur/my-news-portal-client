@@ -4,23 +4,21 @@ import { Link } from 'react-router-dom';
 const PostItem = ({post}) => {
     const description = post.description;
     const descriptionLength = description.substring(0,100);
-    const handleDisplayDetails = (id) =>{
-      
-    }
+
     return (
         <div class="post-content">
                 <div class="row">
                   <div class="col-md-4">
-                    <a class="post-img" href="">
+                  <Link class="post-img" to={`/postDetails/${post._id}`}>
                       <img src={post.imgUrl} alt="" />
-                    </a>
+                    </Link>
                   </div>
                   <div class="col-md-8">
                     <div class="inner-content clearfix">
                       <h3>
-                        <a href="">
+                      <Link to={`/postDetails/${post._id}`}>
                           {post.title}
-                        </a>
+                        </Link>
                       </h3>
                       <div class="post-information">
                         <span>
@@ -35,8 +33,8 @@ const PostItem = ({post}) => {
                       <p class="description">
                         {descriptionLength} ...
                       </p>
-                      <Link to="/postDetails">
-                          <button  onClick={(e)=>handleDisplayDetails(post._id)} class="read-more pull-right" >
+                      <Link to={`/postDetails/${post._id}`}>
+                          <button class="read-more pull-right" >
                             read more
                         </button>
                       </Link>

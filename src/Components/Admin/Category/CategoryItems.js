@@ -1,8 +1,7 @@
-import React from "react";
+import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEdit } from "@fortawesome/free-solid-svg-icons";
-import { faTrash } from "@fortawesome/free-solid-svg-icons";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import React from "react";
+import { Link } from "react-router-dom";
 
 const CategoryItems = ({ newkey, cateItem, handleCategoryDelete,handleEditCategory }) => {
   
@@ -12,12 +11,14 @@ const CategoryItems = ({ newkey, cateItem, handleCategoryDelete,handleEditCatego
       <td>{cateItem.category}</td>
       <td>5</td>
       <td class="edit">
+        <Link to={`/updateCategory/${cateItem._id}`}>
         <button
           className="btn-class"
-          onClick={(e) => handleEditCategory(cateItem._id)}
+          
         >
           <FontAwesomeIcon icon={faEdit} />
         </button>
+        </Link>
       </td>
       <td class="delete">
         <button

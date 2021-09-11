@@ -1,14 +1,13 @@
 import React from "react";
-import Header from "./Header/Header";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import Users from "./Users/Users";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Category from "./Category/Category";
-import Post from "./Post/Post";
-import Footer from "./Footer/Footer";
-import AddPost from "./Post/AddPost";
 import CategoryAdd from "./Category/CategoryAdd";
 import Categoryupdate from "./Category/Categoryupdate";
+import Header from "./Header/Header";
+import AddPost from "./Post/AddPost";
+import Post from "./Post/Post";
 import AddUsers from "./Users/AddUsers";
+import Users from "./Users/Users";
 
 const Admin = () => {
   return (
@@ -32,9 +31,9 @@ const Admin = () => {
           <Route path="/addCategory">
             <CategoryAdd/>
           </Route>
-          {/* <Route path="/updateCategory">
+          <Route path="/updateCategory/:categoryId">
             <Categoryupdate/>
-          </Route> */}
+          </Route>
           <Route path="/addUser">
             <AddUsers/>
           </Route>

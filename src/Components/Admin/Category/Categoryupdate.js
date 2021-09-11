@@ -1,26 +1,38 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router";
 
-const Categoryupdate = ({ editValue }) => {
-console.log(editValue._id);
-  const [updateData, setUpdateData] = useState({ category: "News" });
+const Categoryupdate = () => {
+  const {categoryId} = useParams();
+  const [updateData, setUpdateData] = useState({ category: "" });
+  const [catData, setCatData] = useState([]);
+  useEffect(() => {
+    fetch(`http://localhost:9999/categories/${categoryId}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setCatData(data);
+      });
+  }, []);
 
-  const hadnleCategoryUpdate = (editValue) => {
-    const id = editValue._id;
-    console.log(id);
-    fetch(`https://intense-fjord-22962.herokuapp.com/updateCategory/${id}`, {
+  const hadnleCategoryUpdate = (event) => {
+    // const id = editValue._id;
+    // console.log(id);
+    event.preventDefault();
+    fetch(`http://localhost:9999/updateCategory/${categoryId}`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(updateData),
     })
+    .then(res => res.json())
       .then((result) => {
-        if (result) {
-          console.log(result);
+        if (result.modifiedCount>0) {
+          alert("Update Successful")
+
         }
       });
   };
   const handleBlur = e =>{
     const value= e.target.value;
-    setUpdateData(value);
+    setUpdateData({category:value});
   }
 
   return (
@@ -31,7 +43,7 @@ console.log(editValue._id);
             <h1 class="adin-heading"> Update Category</h1>
           </div>
           <div class="offset-md-3 col-md-6">
-            <form onSubmit={(editValue)=>hadnleCategoryUpdate(editValue)}>
+            <form onSubmit={hadnleCategoryUpdate}>
               <div class="form-group">
                 <input
                   type="hidden"
@@ -48,7 +60,7 @@ console.log(editValue._id);
                   type="text"
                   name="cat_name"
                   class="form-control"
-                  defaultValue={editValue.category}
+                  defaultValue={catData.category}
                   placeholder=""
                   required
                 />

@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-
+import { Link } from "react-router-dom";
 import CategoryItems from "./CategoryItems";
-import Categoryupdate from "./Categoryupdate";
+
 const Category = () => {
   const [recall, setRecall] = useState(0);
   // const [editComponent, setEdtiComponent] = useState(false);
@@ -10,7 +9,7 @@ const Category = () => {
   let count = 0;
   const [catData, setCatData] = useState([]);
   useEffect(() => {
-    fetch("https://intense-fjord-22962.herokuapp.com/categories")
+    fetch("http://localhost:9999/categories")
       .then((res) => res.json())
       .then((data) => {
         setCatData(data);
@@ -20,7 +19,7 @@ const Category = () => {
   // delete action
   const handleCategoryDelete = (id) => {
     let deleteCount = catData.length+1;
-    fetch(`https://intense-fjord-22962.herokuapp.com/deleteCategory/${id}`, {
+    fetch(`http://localhost:9999/deleteCategory/${id}`, {
       method: "DELETE",
     }).then((result) => {
       if (result) {

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import UserItem from "./UserItem";
 
 const Users = () => {
@@ -7,7 +7,7 @@ const Users = () => {
   let count = 0;
   const [userData, setUserData] = useState([]);
   useEffect(() => {
-    fetch("https://intense-fjord-22962.herokuapp.com/users")
+    fetch("http://localhost:9999/users")
       .then((res) => res.json())
       .then((data) => {
         setUserData(data);
@@ -17,7 +17,7 @@ const Users = () => {
   // delete action
   const handleuserDelete = (id) => {
     let deleteCount = userData.length + 1;
-    fetch(`https://intense-fjord-22962.herokuapp.com/deleteUser/${id}`, {
+    fetch(`http://localhost:9999/deleteUser/${id}`, {
       method: "DELETE",
     }).then((result) => {
       if (result) {

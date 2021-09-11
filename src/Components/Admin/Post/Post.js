@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import PostItems from "./PostItems";
 
 const Post = () => {
@@ -10,7 +10,7 @@ const Post = () => {
   const [postData, setPostData] = useState([]);
   console.log(postData);
   useEffect(() => {
-    fetch("https://intense-fjord-22962.herokuapp.com/posts")
+    fetch("http://localhost:9999/posts")
       .then((res) => res.json())
       .then((data) => {
         setPostData(data);
@@ -20,7 +20,7 @@ const Post = () => {
   // delete action
   const handlePostDelete = (id) => {
     let deleteCount = postData.length + 1;
-    fetch(`https://intense-fjord-22962.herokuapp.com/deletePost/${id}`, {
+    fetch(`http://localhost:9999/deletePost/${id}`, {
       method: "DELETE",
     }).then((result) => {
       if (result) {

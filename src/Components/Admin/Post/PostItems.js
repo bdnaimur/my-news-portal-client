@@ -1,8 +1,7 @@
+import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from "react";
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faEdit } from '@fortawesome/free-solid-svg-icons'
-import { faTrash } from '@fortawesome/free-solid-svg-icons'
 
 const PostItems = ({handlePostEdit, post, handlePostDelete, id}) => {
     console.log(post);
@@ -11,7 +10,7 @@ const PostItems = ({handlePostEdit, post, handlePostDelete, id}) => {
       <td class="id">{id}</td>
       <td>{post.title}</td>
       <td>{post.category}</td>
-      <td>08 Sep, 2021</td>
+      <td>{post.date}</td>
       <td>Admin</td>
       <td class="edit">
         <button

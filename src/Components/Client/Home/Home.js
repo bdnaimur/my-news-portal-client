@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Sidebar from "../Sidebar/Sidebar";
-import PostItem from './PostItem'
+import PostItem from './PostItem';
 import SliderShow from "./SliderShow";
 const Home = () => {
   const [postData, setPostData] = useState([]);
@@ -10,7 +10,7 @@ const Home = () => {
   // }
   console.log(postData);
   useEffect(() => {
-    fetch("https://intense-fjord-22962.herokuapp.com/posts")
+    fetch("http://localhost:9999/posts")
       .then((res) => res.json())
       .then((data) => {
         setPostData(data.reverse());
@@ -21,7 +21,7 @@ const Home = () => {
   // details action
   const handlePostDetails = (id) => {
     // let deleteCount = postData.length + 1;
-    // fetch(`https://intense-fjord-22962.herokuapp.com/deletePost/${id}`, {
+    // fetch(`http://localhost:9999/deletePost/${id}`, {
     //   method: "DELETE",
     // }).then((result) => {
     //   if (result) {

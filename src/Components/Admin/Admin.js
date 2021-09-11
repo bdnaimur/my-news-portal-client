@@ -32,9 +32,9 @@ const Admin = () => {
           <Route path="/addCategory">
             <CategoryAdd/>
           </Route>
-          {/* <Route path="/updateCategory">
+          <Route path="/updateCategory/:catId">
             <Categoryupdate/>
-          </Route> */}
+          </Route>
           <Route path="/addUser">
             <AddUsers/>
           </Route>

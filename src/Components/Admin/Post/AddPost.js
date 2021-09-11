@@ -20,7 +20,7 @@ const AddPost = () => {
 
   // cateory fetch
   useEffect(() => {
-    fetch("https://intense-fjord-22962.herokuapp.com/categories")
+    fetch("http://localhost:9999/categories")
       .then((res) => res.json())
       .then((data) => {
         setCatData(data);
@@ -32,7 +32,7 @@ const AddPost = () => {
     const date = new Date().toLocaleString();
     const allData = { ...postData, imgUrl: imageURL, date:date };
     console.log(allData);
-    const url = `https://intense-fjord-22962.herokuapp.com/addPost`;
+    const url = `http://localhost:9999/addPost`;
     fetch(url, {
       method: "POST",
       headers: {

@@ -1,8 +1,10 @@
 import React, { useContext, useState } from 'react';
+import { useHistory } from 'react-router';
 // import { Redirect, Route } from 'react-router-dom';
 import { userContext } from '../Client';
 
 const AdminLogin = () => {
+  let history = useHistory();
     const [loggedInUser, setLoggedInUser] = useContext(userContext);
     const [adminLogin, setAdminLogin] = useState({
         adminUsername: "",
@@ -14,7 +16,10 @@ const AdminLogin = () => {
         if(adminLogin.adminUsername && adminLogin.adminPassdword){
             const loggedInUserWithAdmin = {...loggedInUser,...adminLogin,adminLoggedin:true}
         setLoggedInUser(loggedInUserWithAdmin);
-        alert("Welcome to Admin panel. Please click Admin once more")
+        history.push('/admin');        
+        }
+        else{
+          alert("Username or Password incorrect.")
         }
        
         e.target.reset();

@@ -1,39 +1,39 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router";
+import { useHistory, useParams } from "react-router";
 
 const Categoryupdate = () => {
-  const {categoryId} = useParams();
+  const { catId } = useParams();
+  const history = useHistory();
   const [updateData, setUpdateData] = useState({ category: "" });
+
   const [catData, setCatData] = useState([]);
   useEffect(() => {
-    fetch(`http://localhost:9999/categories/${categoryId}`)
+    fetch(`http://localhost:9999/categories/${catId}`)
       .then((res) => res.json())
       .then((data) => {
         setCatData(data);
       });
-  }, []);
+  }, [catId]);
 
-  const hadnleCategoryUpdate = (event) => {
-    // const id = editValue._id;
-    // console.log(id);
-    event.preventDefault();
-    fetch(`http://localhost:9999/updateCategory/${categoryId}`, {
+  const hadnleCategoryUpdate = (e) => {
+    e.preventDefault();
+    fetch(`http://localhost:9999/updateCategory/${catId}`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(updateData),
     })
-    .then(res => res.json())
+      .then((res) => res.json())
       .then((result) => {
-        if (result.modifiedCount>0) {
-          alert("Update Successful")
-
+        if (result) {
+          console.log(result);
+          history.push("/category");
         }
       });
   };
-  const handleBlur = e =>{
-    const value= e.target.value;
-    setUpdateData({category:value});
-  }
+  const handleBlur = (e) => {
+    const value = e.target.value;
+    setUpdateData({ category: value });
+  };
 
   return (
     <div id="admin-content">
@@ -56,7 +56,7 @@ const Categoryupdate = () => {
               <div class="form-group">
                 <label>Category Name</label>
                 <input
-                  onBlur={(e)=>handleBlur(e)}
+                  onBlur={(e) => handleBlur(e)}
                   type="text"
                   name="cat_name"
                   class="form-control"

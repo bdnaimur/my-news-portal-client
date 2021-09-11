@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router';
 
 const AddUsers = () => {
+    const history = useHistory()
     const [userData, setuserData] = useState({
         fName:"",
         lName:"",
@@ -17,7 +19,13 @@ const AddUsers = () => {
                 "content-type": "application/json",
               },
               body: JSON.stringify(userData),
-            }).then((res) => console.log("server side response", res));
+            })
+            .then(response => response.json())
+            .then((res) => {
+                if(res){
+                    history.push("/users");
+                }
+            });
             e.target.reset();
         
     }
@@ -73,8 +81,8 @@ const AddUsers = () => {
                           <label>User Role</label>
                           <select class="form-control" onBlur={hadleuserRole} name="role" >
                               <option disabled selected>Select User</option>
-                              <option value="normalUser">Normal User</option>
-                              <option value="SuperUser">Super User</option>
+                              <option value="Normal User">Normal User</option>
+                              <option value="Super User">Super User</option>
                           </select>
                       </div>
                       <input type="submit"  name="save" class="btn btn-primary" value="Save" required />

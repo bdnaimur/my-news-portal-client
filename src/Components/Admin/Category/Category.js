@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
+import ReactPaginate from "react-paginate";
 import { Link } from "react-router-dom";
 import CategoryItems from "./CategoryItems";
+
 
 const Category = () => {
   const [recall, setRecall] = useState(0);
@@ -8,22 +10,37 @@ const Category = () => {
   // const [editValue, setEditValue] = useState("");
   let count = 0;
   const [catData, setCatData] = useState([]);
+  const [categoryName, setCategoryName] = useState([]);
+  console.log(categoryName);
   useEffect(() => {
     fetch("http://localhost:9999/categories")
       .then((res) => res.json())
       .then((data) => {
-        setCatData(data);
+        setCatData(data.reverse());
       });
   }, [recall]);
+  // finding no of posts
+
+  useEffect(() => {
+    const array = [];
+    fetch("http://localhost:9999/posts")
+      .then((res) => res.json())
+      .then((data) => {
+        data.forEach((item) => {
+          array.push(item.category);
+        });
+        setCategoryName(array);
+      });
+  }, []);
 
   // delete action
   const handleCategoryDelete = (id) => {
-    let deleteCount = catData.length+1;
+    let deleteCount = catData.length + 1;
     fetch(`http://localhost:9999/deleteCategory/${id}`, {
       method: "DELETE",
     }).then((result) => {
       if (result) {
-        setRecall(deleteCount-1);
+        setRecall(deleteCount - 1);
       }
     });
   };
@@ -35,43 +52,74 @@ const Category = () => {
     // setEditValue(editData[0]);
   };
 
+  // pagination
+
+  const [pageNumber, setPageNumber] = useState(0);
+  const usersPerPage = 5;
+  const pagesVisited = pageNumber * usersPerPage;
+
+  const displayUsers = catData
+    .slice(pagesVisited, pagesVisited + usersPerPage)
+    .map((catItem) => {
+      return (
+        <CategoryItems
+          handleEditCategory={handleEditCategory}
+          handleCategoryDelete={handleCategoryDelete}
+          newkey={++count}
+          cateItem={catItem}
+        />
+      );
+    });
+
+  const pageCount = Math.ceil(catData.length / usersPerPage);
+
+  const changePage = ({ selected }) => {
+    setPageNumber(selected);
+  };
   return (
     <>
-    <div id="admin-content">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-10">
-            <h1 class="admin-heading">All Categories</h1>
-          </div>
-          <div class="col-md-2">
-            <Link class="add-new" to="/addCategory">
-              add category
-            </Link>
-          </div>
-          <div class="col-md-12">
-            <table class="content-table">
-              <thead>
-                <th>S.No.</th>
-                <th>Category Name</th>
-                <th>No. of Posts</th>
-                <th>Edit</th>
-                <th>Delete</th>
-              </thead>
-              <tbody>
-                {catData.map((catItem) => (
-                  <CategoryItems
-                  handleEditCategory={handleEditCategory}
-                    handleCategoryDelete={handleCategoryDelete}
-                    newkey={++count}
-                    cateItem={catItem}
+      <div id="admin-content">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-10">
+              <h1 class="admin-heading">All Categories</h1>
+            </div>
+            <div class="col-md-2">
+              <Link class="add-new" to="/addCategory">
+                add category
+              </Link>
+            </div>
+            <div class="col-md-12">
+              <table class="content-table">
+                <thead>
+                  <th>S.No.</th>
+                  <th>Category Name</th>
+                  <th>No. of Posts</th>
+                  <th>Edit</th>
+                  <th>Delete</th>
+                </thead>
+                <tbody>
+                  {displayUsers}                  
+                </tbody>
+              </table>
+            </div>
+            <div className="offset-md-3 col-md-6 mt-3">
+            <ReactPaginate
+                    previousLabel={"Prev"}
+                    nextLabel={"Next"}
+                    pageCount={pageCount}
+                    onPageChange={changePage}
+                    containerClassName={"paginationBttns"}
+                    previousLinkClassName={"previousBttn"}
+                    nextLinkClassName={"nextBttn"}
+                    disabledClassName={"paginationDisabled"}
+                    activeClassName={"paginationActive"}
                   />
-                ))}
-              </tbody>
-            </table>
+            </div>
+            
           </div>
         </div>
       </div>
-    </div>
     </>
   );
 };

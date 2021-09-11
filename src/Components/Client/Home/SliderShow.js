@@ -2,36 +2,61 @@ import React, { useState } from "react";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from "react-responsive-carousel";
 const SliderShow = ({ postData }) => {
-  // console.log(postData);
-  // const [slide, setSlide] = useState("");
-  // const [index, setIndex] = useState(0);
-  // setInterval(() => {
-  //   setIndex(index+1);
-  //   changeSlide(index)
-  // }, 2000);
-  // const changeSlide = index =>{
-  //   if(index>2){
-  //     setIndex(0)
-  //   }
-  //   setSlide(postData[index].imgUrl)
-  // }
-   return (
+
+  return (
     <>
-    <img src={postData[0].imgUrl} alt=""/>
-    {/* <Carousel>
-      {/* <div>
-        <img src={postData[0].imgUrl} />
-        <p className="legend">{postData[0].title}</p>
+      <div
+        id="carouselExampleIndicators"
+        class="carousel slide"
+        data-ride="carousel"
+      >
+        <ol class="carousel-indicators">
+          <li
+            data-target="#carouselExampleIndicators"
+            data-slide-to="0"
+            class="active"
+          ></li>
+          <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+          <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img class="d-block w-100" src={postData[0].imgUrl} alt="First slide" />
+          </div>
+          <div class="carousel-item">
+            <img class="d-block w-100" src={postData[1].imgUrl} alt="Second slide" />
+          </div>
+          <div class="carousel-item">
+            <img class="d-block w-100" src={postData[2].imgUrl} alt="Third slide" />
+          </div>
+        </div>
+        <a
+          class="carousel-control-prev"
+          href="#carouselExampleIndicators"
+          role="button"
+          data-slide="prev"
+        >
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a
+          class="carousel-control-next"
+          href="#carouselExampleIndicators"
+          role="button"
+          data-slide="next"
+        >
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
       </div>
-      <div>
-        <img src={postData[1].imgUrl} />
-        <p className="legend">{postData[1].title}</p>
-      </div>
-      <div>
-        <img src={postData[2].imgUrl} />
-        <p className="legend">{postData[2].title}</p>
-      </div> */}
-    {/* </Carousel> */} 
+
+      {/* <div class="carousel-item">
+  <img src="..." alt="...">
+  <div class="carousel-caption d-none d-md-block">
+    <h5>...</h5>
+    <p>...</p>
+  </div>
+</div> */}
     </>
   );
 };

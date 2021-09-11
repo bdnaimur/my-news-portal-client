@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import ReactPaginate from "react-paginate";
 import { Link } from "react-router-dom";
 import UserItem from "./UserItem";
 
@@ -10,9 +11,9 @@ const Users = () => {
     fetch("http://localhost:9999/users")
       .then((res) => res.json())
       .then((data) => {
-        setUserData(data);
+        setUserData(data.reverse());
       });
-  }, [recall]);
+  }, [recall,userData]);
 
   // delete action
   const handleuserDelete = (id) => {
@@ -25,10 +26,29 @@ const Users = () => {
       }
     });
   };
-  // edit action
-  const handleUserEdit = (e) => {
-    alert("Update is coming soon");
-  };
+   // pagination
+
+   const [pageNumber, setPageNumber] = useState(0);
+   const usersPerPage = 5;
+   const pagesVisited = pageNumber * usersPerPage;
+ 
+   const displayUsers = userData
+     .slice(pagesVisited, pagesVisited + usersPerPage)
+     .map((userItem) => {
+       return (
+        <UserItem
+        user={userItem}
+        handleuserDelete={handleuserDelete}
+        id={++count}
+      />
+       );
+     });
+ 
+   const pageCount = Math.ceil(userData.length / usersPerPage);
+ 
+   const changePage = ({ selected }) => {
+     setPageNumber(selected);
+   };
   return (
     <div id="admin-content">
       <div class="container">
@@ -52,27 +72,22 @@ const Users = () => {
                 <th>Delete</th>
               </thead>
               <tbody>
-                {userData.map((user) => (
-                  <UserItem
-                    user={user}
-                    handleUserEdit={handleUserEdit}
-                    handleuserDelete={handleuserDelete}
-                    id={++count}
-                  />
-                ))}
+                {displayUsers}
               </tbody>
             </table>
-            {/* <ul class="pagination admin-pagination">
-              <li class="active">
-                <a>1</a>
-              </li>
-              <li>
-                <a>2</a>
-              </li>
-              <li>
-                <a>3</a>
-              </li>
-            </ul> */}
+            <div className="offset-md-3 col-md-6 mt-3">
+            <ReactPaginate
+                    previousLabel={"Prev"}
+                    nextLabel={"Next"}
+                    pageCount={pageCount}
+                    onPageChange={changePage}
+                    containerClassName={"paginationBttns"}
+                    previousLinkClassName={"previousBttn"}
+                    nextLinkClassName={"nextBttn"}
+                    disabledClassName={"paginationDisabled"}
+                    activeClassName={"paginationActive"}
+                  />
+            </div>
           </div>
         </div>
       </div>

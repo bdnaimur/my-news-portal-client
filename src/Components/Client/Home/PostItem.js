@@ -27,7 +27,7 @@ const PostItem = ({post}) => {
                         </span>
                         <span>
                           <i class="fa fa-calendar" aria-hidden="true"></i>
-                         {post.date}
+                          {post.date}
                         </span>
                       </div>
                       <p class="description">

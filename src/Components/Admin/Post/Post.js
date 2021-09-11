@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
+import ReactPaginate from "react-paginate";
 import { Link } from "react-router-dom";
 import PostItems from "./PostItems";
 
 const Post = () => {
   const [recall, setRecall] = useState(0);
-  //   const [editComponent, setEdtiComponent] = useState(false);
-  //   const [editValue, setEditValue] = useState("");
   let count = 0;
   const [postData, setPostData] = useState([]);
   console.log(postData);
@@ -28,13 +27,29 @@ const Post = () => {
       }
     });
   };
-  // edit action
-  const handlePostEdit = (e) => {
-      alert("Update is coming soon");
-    // setEdtiComponent(true);
-    // const editData = postData.filter(data => e === data._id);
-    // setEditValue(editData[0]);
-  };
+     // pagination
+
+     const [pageNumber, setPageNumber] = useState(0);
+     const usersPerPage = 5;
+     const pagesVisited = pageNumber * usersPerPage;
+   
+     const displayUsers = postData
+       .slice(pagesVisited, pagesVisited + usersPerPage)
+       .map((postItem) => {
+         return (
+          <PostItems
+                    id={++count}
+                    handlePostDelete={handlePostDelete}
+                    post={postItem}
+                  ></PostItems>
+         );
+       });
+   
+     const pageCount = Math.ceil(postData.length / usersPerPage);
+   
+     const changePage = ({ selected }) => {
+       setPageNumber(selected);
+     };
   return (
     <div id="admin-content">
       <div class="container">
@@ -59,21 +74,20 @@ const Post = () => {
                 <th>Delete</th>
               </thead>
               <tbody>
-                {postData.map((post) => (
-                  <PostItems
-                    id={++count}
-                    handlePostDelete={handlePostDelete}
-                    handlePostEdit={handlePostEdit}
-                    post={post}
-                  ></PostItems>
-                ))}
+                {displayUsers}
               </tbody>
             </table>
-            {/* <ul class='pagination admin-pagination'>
-                        <li class="active"><a>1</a></li>
-                        <li><a>2</a></li>
-                        <li><a>3</a></li>
-                    </ul> */}
+            <ReactPaginate
+                    previousLabel={"Prev"}
+                    nextLabel={"Next"}
+                    pageCount={pageCount}
+                    onPageChange={changePage}
+                    containerClassName={"paginationBttns"}
+                    previousLinkClassName={"previousBttn"}
+                    nextLinkClassName={"nextBttn"}
+                    disabledClassName={"paginationDisabled"}
+                    activeClassName={"paginationActive"}
+                  />
           </div>
         </div>
       </div>

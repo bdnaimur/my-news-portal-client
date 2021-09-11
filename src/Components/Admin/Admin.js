@@ -6,7 +6,9 @@ import Categoryupdate from "./Category/Categoryupdate";
 import Header from "./Header/Header";
 import AddPost from "./Post/AddPost";
 import Post from "./Post/Post";
+import UpdatePost from "./Post/UpdatePost";
 import AddUsers from "./Users/AddUsers";
+import UpdateUsers from "./Users/UpdateUsers";
 import Users from "./Users/Users";
 
 const Admin = () => {
@@ -31,8 +33,14 @@ const Admin = () => {
           <Route path="/addCategory">
             <CategoryAdd/>
           </Route>
-          <Route path="/updateCategory/:categoryId">
+          <Route path="/updatePost/:postId">
+            <UpdatePost/>
+          </Route>
+          <Route path="/updateCategory/:catId">
             <Categoryupdate/>
+          </Route>
+          <Route path="/updateUser/:userId">
+            <UpdateUsers/>
           </Route>
           <Route path="/addUser">
             <AddUsers/>
@@ -42,7 +50,7 @@ const Admin = () => {
           </Route>
         </Switch>
       </Router>
-      
+          
     </div>
   );
 };

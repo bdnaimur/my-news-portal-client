@@ -1,7 +1,7 @@
-import React from "react";
+import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEdit } from "@fortawesome/free-solid-svg-icons";
-import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import React from "react";
+import { Link } from "react-router-dom";
 
 const UserItem = ({ user, handleUserEdit, handleuserDelete, id }) => {
   return (
@@ -11,9 +11,11 @@ const UserItem = ({ user, handleUserEdit, handleuserDelete, id }) => {
       <td>{user.username}</td>
       <td>{user.role}</td>
       <td class="edit">
-        <button className="btn-class" onClick={(e) => handleUserEdit(user._id)}>
+      <Link to={`/updateUser/${user._id}`}>
+        <button className="btn-class">
           <FontAwesomeIcon icon={faEdit} />
         </button>
+        </Link>
       </td>
       <td class="delete">
         <button

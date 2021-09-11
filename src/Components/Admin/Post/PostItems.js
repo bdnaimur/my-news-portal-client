@@ -1,6 +1,7 @@
 import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from "react";
+import { Link } from 'react-router-dom';
 
 
 const PostItems = ({handlePostEdit, post, handlePostDelete, id}) => {
@@ -13,12 +14,11 @@ const PostItems = ({handlePostEdit, post, handlePostDelete, id}) => {
       <td>{post.date}</td>
       <td>Admin</td>
       <td class="edit">
-        <button
-          className="btn-class"
-          onClick={(e) => handlePostEdit(post._id)}
-        >
+      <Link to={`/updatePost/${post._id}`}>
+        <button className="btn-class">
           <FontAwesomeIcon icon={faEdit} />
         </button>
+        </Link>
       </td>
       <td class="delete">
         <button

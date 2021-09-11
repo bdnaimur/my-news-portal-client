@@ -3,8 +3,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import { Link } from "react-router-dom";
 
-const CategoryItems = ({ newkey, cateItem, handleCategoryDelete,handleEditCategory }) => {
-  
+const CategoryItems = ({
+  newkey,
+  cateItem,
+  handleCategoryDelete,
+  handleEditCategory,
+}) => {
   return (
     <tr>
       <td class="id">{newkey}</td>
@@ -12,12 +16,9 @@ const CategoryItems = ({ newkey, cateItem, handleCategoryDelete,handleEditCatego
       <td>5</td>
       <td class="edit">
         <Link to={`/updateCategory/${cateItem._id}`}>
-        <button
-          className="btn-class"
-          
-        >
-          <FontAwesomeIcon icon={faEdit} />
-        </button>
+          <button className="btn-class">
+            <FontAwesomeIcon icon={faEdit} />
+          </button>
         </Link>
       </td>
       <td class="delete">

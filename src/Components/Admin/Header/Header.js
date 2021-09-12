@@ -1,8 +1,11 @@
 import React from "react";
+import { useContext } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import logo from '../../../images/news-logo.png'
+import { userContext } from "../../Client/Client";
 
 const Header = () => {
+  const [loggedInUser, setLoggedInUser] = useContext(userContext);
+
   return (
     <>
       <div id="header-admin">
@@ -12,9 +15,9 @@ const Header = () => {
           <div class="row">
             {/* <!-- LOGO --> */}
             <div class="col-md-2">
-              {/* <Link to="/home">
-                <img class="logo" src={logo} alt="Logo"/>
-              </Link> */}
+              <Link to="/post">
+                <span style={{color:"white", fontSize:"25px"}}>{loggedInUser.userName}</span>
+              </Link>
             </div>
             <div class="offset-md-9  col-md-1">
               <a href="logout.php" class="admin-logout">

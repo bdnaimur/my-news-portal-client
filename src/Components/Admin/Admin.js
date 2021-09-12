@@ -17,12 +17,12 @@ const Admin = () => {
   
       <Router>
       <Header />
-        <Switch>
-          <Route path="/post">
-            <Post />
-          </Route>
+        <Switch>          
           <Route path="/category">
             <Category />
+          </Route>
+          <Route path="/post">
+            <Post />
           </Route>
           <Route path="/users">
             <Users />

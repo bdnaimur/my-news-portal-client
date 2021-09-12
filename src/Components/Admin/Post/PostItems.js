@@ -12,7 +12,7 @@ const PostItems = ({handlePostEdit, post, handlePostDelete, id}) => {
       <td>{post.title}</td>
       <td>{post.category}</td>
       <td>{post.date}</td>
-      <td>Admin</td>
+      <td>{post.userName}</td>
       <td class="edit">
       <Link to={`/updatePost/${post._id}`}>
         <button className="btn-class">

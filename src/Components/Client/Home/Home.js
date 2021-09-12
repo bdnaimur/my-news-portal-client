@@ -4,20 +4,21 @@ import PostItem from './PostItem';
 import SliderShow from "./SliderShow";
 const Home = () => {
   const [postData, setPostData] = useState([]);
-  const slideArray = [];
-  // if(postData.length>0){
-    
-  // }
-  console.log(postData);
+ 
+  const slideArray = [].slice(0,4);
+  console.log(slideArray);
   useEffect(() => {
     fetch("http://localhost:9999/posts")
       .then((res) => res.json())
       .then((data) => {
+        
         setPostData(data.reverse());
       })
 
   }, []);
-
+  postData.forEach(image => {
+    slideArray.push(image.imgUrl);
+  });
   // details action
   const handlePostDetails = (id) => {
     // let deleteCount = postData.length + 1;
@@ -35,7 +36,7 @@ const Home = () => {
       <div class="container">
         <div class="row">
         <div class="offset-md-2 col-md-8">
-          {postData.length && <SliderShow postData={postData}/>}
+          {postData.length && <SliderShow postData={slideArray}/>}
         </div>
         </div>
         <div class="row">

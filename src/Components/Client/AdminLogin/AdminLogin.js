@@ -1,24 +1,43 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
 // import { Redirect, Route } from 'react-router-dom';
 import { userContext } from '../Client';
 
 const AdminLogin = () => {
   let history = useHistory();
+  const [userData, setUserData] = useState([]);
     const [loggedInUser, setLoggedInUser] = useContext(userContext);
     const [adminLogin, setAdminLogin] = useState({
+        normalUsername: "",
+        normalUserPassword: "",
         adminUsername: "",
         adminPassword: "",
-        adminLoggedin:false
+        adminLoggedin:false,
+        userLoggedIn: false
     })
+    const agentName = userData.filter(singleUserName => adminLogin.normalUsername===singleUserName.username);
+    console.log("agentName",agentName);
+    const agentPassword = userData.filter(singleUserName => adminLogin.normalUserPassword===singleUserName.password);
+    console.log("agentPassword",agentPassword);
+    useEffect(()=>{
+      fetch(`http://localhost:9999/users`) 
+      .then(res => res.json())
+      .then(data => setUserData(data));
+    },[])
     const handleLoginSubmit = e =>{
         e.preventDefault();
-        if(adminLogin.adminUsername && adminLogin.adminPassdword){
+        if(agentName[0] && agentPassword[0]){
+          const loggedInUserWithAdmin = {...loggedInUser,...adminLogin,userLoggedIn:true, userName:agentName[0].fName+ ' ' +agentName[0].lName}
+          console.log("inside if",loggedInUserWithAdmin);
+        setLoggedInUser(loggedInUserWithAdmin);
+        history.push('/admin');
+        }
+        else if(adminLogin.adminUsername && adminLogin.adminPassdword){
             const loggedInUserWithAdmin = {...loggedInUser,...adminLogin,adminLoggedin:true}
         setLoggedInUser(loggedInUserWithAdmin);
         history.push('/admin');        
         }
-        else{
+        else if(!adminLogin.userLoggedIn || !adminLogin.adminLoggedin){
           alert("Username or Password incorrect.")
         }
        
@@ -27,15 +46,18 @@ const AdminLogin = () => {
     const handleuserName = e =>{
         if(e.target.value === "test@test.com"){
             const insertUsername = {...adminLogin, adminUsername:e.target.value};
-            setAdminLogin(insertUsername);
+            setAdminLogin(insertUsername);            
         }
-       
+        else {const insertNormalUsername = {...adminLogin, normalUsername:e.target.value}
+        setAdminLogin(insertNormalUsername);}
     }
     const handlePassword = e =>{
         if(e.target.value === "#2021dev"){
         const insertPassword = {...adminLogin, adminPassdword:e.target.value};
         setAdminLogin(insertPassword);
         }
+        else {const insertNormalPassword = {...adminLogin, normalUserPassword:e.target.value}
+        setAdminLogin(insertNormalPassword)}
     }
     console.log(loggedInUser);
   return (

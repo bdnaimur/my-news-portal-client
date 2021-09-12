@@ -1,13 +1,18 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { useContext } from "react";
+import { useHistory } from "react-router";
+import { userContext } from "../../Client/Client";
 
 const AddPost = () => {
+  const [loggedInUser, setLoggedInUser] = useContext(userContext);
   const [imageURL, setIMageURL] = useState(null);
   const [postData, setPostData] = useState({
     title: "",
     description: "",
     category: "",
   });
+  const history = useHistory();
   const [catData, setCatData] = useState([]);
   
   const newArray = [];
@@ -30,7 +35,7 @@ const AddPost = () => {
   const handlePostSubmit = (data) => {
     data.preventDefault();
     const date = new Date().toLocaleString();
-    const allData = { ...postData, imgUrl: imageURL, date:date };
+    const allData = { ...postData, imgUrl: imageURL, date:date, userName: loggedInUser.userName };
     console.log(allData);
     const url = `http://localhost:9999/addPost`;
     fetch(url, {
@@ -39,7 +44,11 @@ const AddPost = () => {
         "content-type": "application/json",
       },
       body: JSON.stringify(allData),
-    }).then((res) => console.log("server side response", res));
+    })
+    .then(res =>res.json())
+    .then((data) => {
+        history.push("/post")
+    });
     data.target.reset();
   };
 

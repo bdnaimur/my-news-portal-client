@@ -12,7 +12,7 @@ const Post = () => {
     fetch("http://localhost:9999/posts")
       .then((res) => res.json())
       .then((data) => {
-        setPostData(data);
+        setPostData(data.reverse());
       });
   }, [recall]);
 

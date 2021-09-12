@@ -3,7 +3,6 @@ import SidebarPost from './SidebarPost';
 
 const Sidebar = ({postData}) => {
     const latestPostData = postData.slice(0,5);
-    console.log(latestPostData);
     return (
         <div id="sidebar" class="col-md-4">
     {/* <!-- search box --> */}

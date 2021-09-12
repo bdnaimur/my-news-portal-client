@@ -1,11 +1,12 @@
-import React from "react";
-import { useContext } from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import React, { useContext } from "react";
+import { Link } from "react-router-dom";
 import { userContext } from "../../Client/Client";
 
 const Header = () => {
   const [loggedInUser, setLoggedInUser] = useContext(userContext);
-
+  const hendleLogout = e =>{
+    setLoggedInUser({});
+  }
   return (
     <>
       <div id="header-admin">
@@ -20,7 +21,7 @@ const Header = () => {
               </Link>
             </div>
             <div class="offset-md-9  col-md-1">
-              <a href="logout.php" class="admin-logout">
+              <a onClick={hendleLogout} class="admin-logout">
                 logout
               </a>
             </div>

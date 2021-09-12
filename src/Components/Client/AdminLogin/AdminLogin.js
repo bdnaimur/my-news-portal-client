@@ -13,7 +13,8 @@ const AdminLogin = () => {
         adminUsername: "",
         adminPassword: "",
         adminLoggedin:false,
-        userLoggedIn: false
+        userLoggedIn: false,
+        userId: 0
     })
     const agentName = userData.filter(singleUserName => adminLogin.normalUsername===singleUserName.username);
     console.log("agentName",agentName);
@@ -26,14 +27,18 @@ const AdminLogin = () => {
     },[])
     const handleLoginSubmit = e =>{
         e.preventDefault();
-        if(agentName[0] && agentPassword[0]){
-          const loggedInUserWithAdmin = {...loggedInUser,...adminLogin,userLoggedIn:true, userName:agentName[0].fName+ ' ' +agentName[0].lName}
-          console.log("inside if",loggedInUserWithAdmin);
+        if(agentName[0] && agentPassword[0] && agentName[0].role==="Super User"){
+          const loggedInUserWithAdmin = {...loggedInUser,...adminLogin,userLoggedIn:true, userName:agentName[0].fName+ ' ' +agentName[0].lName, userLevel:10, userId:agentName[0].userId};
+        setLoggedInUser(loggedInUserWithAdmin);
+        history.push('/admin');
+        }
+        else if(agentName[0] && agentPassword[0] && agentName[0].role==="Normal User"){
+          const loggedInUserWithAdmin = {...loggedInUser,...adminLogin,userLoggedIn:true, userName:agentName[0].fName+ ' ' +agentName[0].lName, userLevel:15, userId:agentName[0].userId};
         setLoggedInUser(loggedInUserWithAdmin);
         history.push('/admin');
         }
         else if(adminLogin.adminUsername && adminLogin.adminPassdword){
-            const loggedInUserWithAdmin = {...loggedInUser,...adminLogin,adminLoggedin:true}
+            const loggedInUserWithAdmin = {...loggedInUser,...adminLogin,adminLoggedin:true, userName:"Super User", userLevel:5, userId:1}
         setLoggedInUser(loggedInUserWithAdmin);
         history.push('/admin');        
         }

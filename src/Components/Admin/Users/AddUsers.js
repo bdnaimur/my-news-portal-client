@@ -3,13 +3,7 @@ import { useHistory } from 'react-router';
 
 const AddUsers = () => {
     const history = useHistory()
-    const [userData, setuserData] = useState({
-        fName:"",
-        lName:"",
-        username:"",
-        password:"",
-        role:""
-    });
+    const [userData, setuserData] = useState({});
     const handleUserSubmit = e =>{
             e.preventDefault();
             const url = `http://localhost:9999/addUser`;
@@ -30,26 +24,12 @@ const AddUsers = () => {
         
     }
 
-    const handleFirstName = e =>{
-        const insertFName = { ...userData, fName: e.target.value };
-        setuserData(insertFName);
+    const handleBlur = e =>{
+        const insertUserData = { ...userData};
+        insertUserData[e.target.name] = e.target.value;
+        setuserData(insertUserData);
     }
-    const handlelastName = e =>{
-        const insertLName = { ...userData, lName: e.target.value };
-        setuserData(insertLName);
-    }
-    const handleUserName = e =>{
-        const insertUsername = { ...userData, username: e.target.value };
-        setuserData(insertUsername);
-    }
-    const handlePassWord = e =>{
-        const insertPassword = { ...userData, password: e.target.value };
-        setuserData(insertPassword);
-    }
-    const hadleuserRole = e =>{
-        const insertRole = { ...userData, role: e.target.value };
-        setuserData(insertRole);
-    }
+    
     return (
         <div id="admin-content">
         <div class="container">
@@ -62,27 +42,31 @@ const AddUsers = () => {
                   <form  onSubmit={handleUserSubmit} autocomplete="off">
                       <div class="form-group">
                           <label>First Name</label>
-                          <input type="text" onBlur={handleFirstName} name="fname" class="form-control" placeholder="First Name" required/>
+                          <input type="text" onBlur={handleBlur} name="fName" class="form-control" placeholder="First Name" required/>
                       </div>
                           <div class="form-group">
                           <label>Last Name</label>
-                          <input type="text" onBlur={handlelastName} name="lname" class="form-control" placeholder="Last Name" required/>
+                          <input type="text" onBlur={handleBlur} name="lName" class="form-control" placeholder="Last Name" required/>
                       </div>
                       <div class="form-group">
                           <label>User Name</label>
-                          <input type="text" onBlur={handleUserName} name="user" class="form-control" placeholder="Username" required/>
+                          <input type="text" onBlur={handleBlur} name="username" class="form-control" placeholder="Username" required/>
+                      </div>
+                      <div class="form-group">
+                          <label>User Id</label>
+                          <input type="text" onBlur={handleBlur} name="userId" class="form-control" placeholder="Insert a Number" required/>
                       </div>
 
                       <div class="form-group">
                           <label>Password</label>
-                          <input type="password" onBlur={handlePassWord} name="password" class="form-control" placeholder="Password" required/>
+                          <input type="password" onBlur={handleBlur} name="password" class="form-control" placeholder="Password" required/>
                       </div>
                       <div class="form-group">
                           <label>User Role</label>
-                          <select class="form-control" onBlur={hadleuserRole} name="role" >
+                          <select class="form-control" onBlur={handleBlur} name="role" >
                               <option disabled selected>Select User</option>
-                              <option value="Normal User">Normal User</option>
-                              <option value="Super User">Super User</option>
+                              <option value="15">Normal User</option>
+                              <option value="10">Super User</option>
                           </select>
                       </div>
                       <input type="submit"  name="save" class="btn btn-primary" value="Save" required />

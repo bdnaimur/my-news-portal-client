@@ -14,8 +14,7 @@ import Users from "./Users/Users";
 const Admin = () => {
   return (
     <div>
-  
-      <Router>
+        <Router>
       <Header />
         <Switch>          
           <Route path="/category">

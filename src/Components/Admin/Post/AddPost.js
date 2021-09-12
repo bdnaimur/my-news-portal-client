@@ -35,7 +35,7 @@ const AddPost = () => {
   const handlePostSubmit = (data) => {
     data.preventDefault();
     const date = new Date().toLocaleString();
-    const allData = { ...postData, imgUrl: imageURL, date:date, userName: loggedInUser.userName };
+    const allData = { ...postData, imgUrl: imageURL, date:date, userName: loggedInUser.userName, userId: loggedInUser.userId };
     console.log(allData);
     const url = `http://localhost:9999/addPost`;
     fetch(url, {

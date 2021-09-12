@@ -1,19 +1,21 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import ReactPaginate from "react-paginate";
 import { Link } from "react-router-dom";
 import UserItem from "./UserItem";
-
+import { userContext } from '../../Client/Client';
 const Users = () => {
+  const [logginUser, setLoggedinUser] = useContext(userContext);
+  const [userData, setUserData] = useState([]);
   const [recall, setRecall] = useState(0);
   let count = 0;
-  const [userData, setUserData] = useState([]);
+  console.log(userData);
   useEffect(() => {
     fetch("http://localhost:9999/users")
       .then((res) => res.json())
       .then((data) => {
         setUserData(data.reverse());
       });
-  }, [recall,userData]);
+  }, [recall]);
 
   // delete action
   const handleuserDelete = (id) => {
@@ -45,8 +47,7 @@ const Users = () => {
      });
  
    const pageCount = Math.ceil(userData.length / usersPerPage);
- 
-   const changePage = ({ selected }) => {
+    const changePage = ({ selected }) => {
      setPageNumber(selected);
    };
   return (
@@ -68,8 +69,11 @@ const Users = () => {
                 <th>Full Name</th>
                 <th>User Name</th>
                 <th>Role</th>
+                {logginUser.userLevel===5 &&
+                <>
                 <th>Edit</th>
                 <th>Delete</th>
+                </>}
               </thead>
               <tbody>
                 {displayUsers}

@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
-// import { Redirect, Route } from 'react-router-dom';
 import { userContext } from '../Client';
 
 const AdminLogin = () => {
@@ -27,12 +26,12 @@ const AdminLogin = () => {
     },[])
     const handleLoginSubmit = e =>{
         e.preventDefault();
-        if(agentName[0] && agentPassword[0] && agentName[0].role==="Super User"){
+        if(agentName[0] && agentPassword[0] && agentName[0].role==="10"){
           const loggedInUserWithAdmin = {...loggedInUser,...adminLogin,userLoggedIn:true, userName:agentName[0].fName+ ' ' +agentName[0].lName, userLevel:10, userId:agentName[0].userId};
         setLoggedInUser(loggedInUserWithAdmin);
         history.push('/admin');
         }
-        else if(agentName[0] && agentPassword[0] && agentName[0].role==="Normal User"){
+        else if(agentName[0] && agentPassword[0] && agentName[0].role==="15"){
           const loggedInUserWithAdmin = {...loggedInUser,...adminLogin,userLoggedIn:true, userName:agentName[0].fName+ ' ' +agentName[0].lName, userLevel:15, userId:agentName[0].userId};
         setLoggedInUser(loggedInUserWithAdmin);
         history.push('/admin');

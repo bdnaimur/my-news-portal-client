@@ -41,9 +41,10 @@ const Header = () => {
                   <li>
                     <Link to="/category">Category</Link>
                   </li>
+                  {loggedInUser.userLevel<11 &&
                   <li>
                     <Link to="/users">Users</Link>
-                  </li>
+                  </li>}
                 </ul>
               </div>
             </div>

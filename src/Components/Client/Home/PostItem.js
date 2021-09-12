@@ -25,9 +25,13 @@ const PostItem = ({post}) => {
                           <i class="fa fa-tags" aria-hidden="true"></i>
                           <a href="category.php">{post.category}</a>
                         </span>
-                        <span>
+                        <span className="mr-5 d-inline-block">
                           <i class="fa fa-calendar" aria-hidden="true"></i>
                           {post.date}
+                        </span>
+                        <span className="ms-5">
+                          <small>{post.userName}</small>
+                         
                         </span>
                       </div>
                       <p class="description">

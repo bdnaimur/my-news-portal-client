@@ -44,7 +44,8 @@ const AdminLogin = () => {
         else if(!adminLogin.userLoggedIn || !adminLogin.adminLoggedin){
           alert("Username or Password incorrect.")
         }
-       
+        let loggedInUserSession = JSON.stringify(loggedInUser)
+       localStorage.setItem("loginData", 'loggedInUserSession')
         e.target.reset();
     }
     const handleuserName = e =>{

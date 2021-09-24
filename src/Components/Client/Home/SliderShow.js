@@ -1,16 +1,40 @@
-import React, { useState } from "react";
-import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
-import { Carousel } from "react-responsive-carousel";
+import React from "react";
+import "swiper/components/navigation/navigation.min.css";
+import "swiper/components/pagination/pagination.min.css";
+import SwiperCore, {
+  Autoplay, Pagination
+} from 'swiper/core';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import "swiper/swiper.min.css";
 const SliderShow = ({ postData }) => {
-    console.log(postData);
+  SwiperCore.use([Pagination, Autoplay]);
   return (
-    <div>
-     <img src={postData[0]} alt=""/>
-     <br/>
-     <img src={postData[1]} alt=""/>
-      <br/>
-      <img src={postData[2]} alt=""/>
-    </div>
+    <section >
+            <div className="pb-4">
+                <Swiper spaceBetween={30} centeredSlides={false} autoplay={{
+                    "delay": 2500,
+                    "disableOnInteraction": false
+                }} pagination={{
+                    "clickable": true
+                }} className="mySwiper">
+                    <SwiperSlide>
+                        <a href="#" className="w-full block h-100">
+                            <img alt="covid 19" src={postData.imrUrl}  className="w-full object-cover" />
+                        </a>
+                    </SwiperSlide>
+                    <SwiperSlide>
+                        <a href="#" className="w-full block h-100">
+                            <img alt="covid 19" src={postData.imrUrl}  className="w-full object-cover" />
+                        </a>
+                    </SwiperSlide>
+                    <SwiperSlide>
+                        <a href="#" className="w-full block h-100">
+                            <img alt="covid 19" src={postData.imrUrl} className="w-full object-cover" />
+                        </a>
+                    </SwiperSlide>
+                </Swiper>
+            </div>
+        </section>
   );
 };
 

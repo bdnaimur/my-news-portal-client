@@ -1,3 +1,5 @@
+// import "swiper/css";
+// import { Swiper, SwiperSlide } from "swiper/react";
 import './App.css';
 import Client from './Components/Client/Client';
 

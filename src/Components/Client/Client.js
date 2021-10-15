@@ -17,6 +17,7 @@ import SuperAdmin from "./SuperAdmin/SuperAdmin";
 import AdminLogin from "./AdminLogin/AdminLogin";
 import PostDetails from "./PostDetails/PostDetails";
 import PrivateRouteInternational from "./PrivateRouteInternational/privateInternational";
+import Contact from './Contact/Contact';
 export const userContext = createContext();
 
 const Client = () => {
@@ -60,6 +61,9 @@ const Client = () => {
           </Route>
           <Route path="/signup">
             <Signup/>
+          </Route>
+          <Route path="/contact">
+            <Contact/>
           </Route>
         <Route path="/">
           <Home />

@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
 import { userContext } from '../Client';
+import FireBaseLogin from './FireBaseLogin';
 
 const AdminLogin = () => {
   let history = useHistory();
@@ -73,7 +74,7 @@ const AdminLogin = () => {
             {/* <img class="logo" src="images/news.jpg"> */}
             <h3 class="heading">Admin</h3>
             {/* <!-- Form Start --> */}
-            <form onSubmit={handleLoginSubmit}>
+            <form onSubmit={handleLoginSubmit} className="mb-5">
               <div class="form-group">
                 <label>Username</label>
                 <input
@@ -103,6 +104,7 @@ const AdminLogin = () => {
                 value="login"
               />
             </form>
+            <FireBaseLogin/>
             {/* <!-- /Form  End --> */}
           </div>
         </div>

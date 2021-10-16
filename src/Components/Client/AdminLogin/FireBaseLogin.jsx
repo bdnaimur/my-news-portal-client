@@ -1,30 +1,39 @@
-import React from 'react';
-// import { firebase } from 'firebase/app';
-import 'firebase/compat/firestore';
-import { getAuth, getRedirectResult, GoogleAuthProvider } from "firebase/auth";
-import { firebaseConfig } from './fireBAseConfig';
-// import { firebase } from 'firebase/app';
+import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+// import { GoogleAuthProvider } from "firebase/auth";
 import firebase from 'firebase/compat/app';
-
-
-
+import 'firebase/compat/auth';
+import { firebaseConfig } from './fireBAseConfig';
+import 'firebase/compat/firestore';
+import { userContext } from '../Client';
+import { useContext } from 'react';
+import { useHistory } from 'react-router';
 
 if (!firebase.apps.length) {
-  firebase.initializeApp(firebaseConfig);
+    firebase.initializeApp(firebaseConfig);
 }
 
 const FireBaseLogin = () => {
-    const signWithGoogle = (e) => {
+    const history = useHistory();
+    const [loggedInUser, setLoggedInUser] = useContext(userContext);
+    
+    const provider = new GoogleAuthProvider();
+    const signWithGoogle = () => {
+
         const auth = getAuth();
-        getRedirectResult(auth)
+        signInWithPopup(auth, provider)
             .then((result) => {
-                // This gives you a Google Access Token. You can use it to access Google APIs.
+                // This gives you a Google Access Token. You can use it to access the Google API.
                 const credential = GoogleAuthProvider.credentialFromResult(result);
                 const token = credential.accessToken;
-
                 // The signed-in user info.
                 const user = result.user;
-                alert(user)
+                console.log('loggedInUser',loggedInUser);
+                setLoggedInUser(user);
+                console.log('After loggedInUser',loggedInUser);
+                if(user.email){
+                    history.push('/admin');
+                }
+                // ...
             }).catch((error) => {
                 // Handle Errors here.
                 const errorCode = error.code;
@@ -39,7 +48,7 @@ const FireBaseLogin = () => {
 
     return (
         <div>
-            <button onClick={signWithGoogle}>Google Sign In</button>
+            <button className="btn btn-danger w-100 mb-4" onClick={signWithGoogle}>Google Sign In</button>
         </div>
     );
 };

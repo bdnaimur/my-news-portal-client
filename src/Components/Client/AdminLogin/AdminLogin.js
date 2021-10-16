@@ -17,11 +17,11 @@ const AdminLogin = () => {
         userId: 0
     })
     const agentName = userData.filter(singleUserName => adminLogin.normalUsername===singleUserName.username);
-    console.log("agentName",agentName);
+
     const agentPassword = userData.filter(singleUserName => adminLogin.normalUserPassword===singleUserName.password);
-    console.log("agentPassword",agentPassword);
+
     useEffect(()=>{
-      fetch(`http://localhost:9999/users`) 
+      fetch(`https://intense-fjord-22962.herokuapp.com/users`) 
       .then(res => res.json())
       .then(data => setUserData(data));
     },[])
@@ -29,24 +29,24 @@ const AdminLogin = () => {
         e.preventDefault();
         if(agentName[0] && agentPassword[0] && agentName[0].role==="10"){
           const loggedInUserWithAdmin = {...loggedInUser,...adminLogin,userLoggedIn:true, userName:agentName[0].fName+ ' ' +agentName[0].lName, userLevel:10, userId:agentName[0].userId};
-        setLoggedInUser(loggedInUserWithAdmin);
+        setLoggedInUser({...loggedInUser,...loggedInUserWithAdmin});
         history.push('/admin');
         }
         else if(agentName[0] && agentPassword[0] && agentName[0].role==="15"){
           const loggedInUserWithAdmin = {...loggedInUser,...adminLogin,userLoggedIn:true, userName:agentName[0].fName+ ' ' +agentName[0].lName, userLevel:15, userId:agentName[0].userId};
-        setLoggedInUser(loggedInUserWithAdmin);
+        setLoggedInUser({...loggedInUser,...loggedInUserWithAdmin});
         history.push('/admin');
         }
         else if(adminLogin.adminUsername && adminLogin.adminPassdword){
             const loggedInUserWithAdmin = {...loggedInUser,...adminLogin,adminLoggedin:true, userName:"Super User", userLevel:5, userId:1}
-        setLoggedInUser(loggedInUserWithAdmin);
+        setLoggedInUser({...loggedInUser,...loggedInUserWithAdmin});
         history.push('/admin');        
         }
         else if(!adminLogin.userLoggedIn || !adminLogin.adminLoggedin){
           alert("Username or Password incorrect.")
         }
-        let loggedInUserSession = JSON.stringify(loggedInUser)
-       localStorage.setItem("loginData", 'loggedInUserSession')
+      //   let loggedInUserSession = JSON.stringify(loggedInUser)
+      //  localStorage.setItem("loginData", 'loggedInUserSession')
         e.target.reset();
     }
     const handleuserName = e =>{
@@ -65,7 +65,7 @@ const AdminLogin = () => {
         else {const insertNormalPassword = {...adminLogin, normalUserPassword:e.target.value}
         setAdminLogin(insertNormalPassword)}
     }
-    console.log(loggedInUser);
+
   return (
     <div id="wrapper-admin" class="body-content">
       <div class="container">
@@ -100,7 +100,7 @@ const AdminLogin = () => {
               <input
                 type="submit"
                 name="login"
-                class="btn btn-primary"
+                class="btn btn-primary w-100 mt-3"
                 value="login"
               />
             </form>

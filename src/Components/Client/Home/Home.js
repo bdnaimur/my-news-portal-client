@@ -7,7 +7,7 @@ const Home = () => {
   const [postData, setPostData] = useState([]);
    const sliderShowArray = postData.slice(0,4);
   useEffect(() => {
-    fetch("http://localhost:9999/posts")
+    fetch("https://intense-fjord-22962.herokuapp.com/posts")
       .then((res) => res.json())
       .then((data) => {
         setPostData(data.reverse());

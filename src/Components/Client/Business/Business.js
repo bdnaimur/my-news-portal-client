@@ -4,7 +4,7 @@ import BusinessSingle from './BusinessSingle';
 const Business = () => {
     const [business, setbusiness] = useState([]);
   useEffect(() => {
-    fetch("http://localhost:9999/posts")
+    fetch("https://intense-fjord-22962.herokuapp.com/posts")
       .then((res) => res.json())
       .then((data) => {
         if (data) {

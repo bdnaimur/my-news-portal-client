@@ -8,7 +8,7 @@ const CategoryAdd = () => {
   });
   const handleCateorySubmit = (e) => {
     e.preventDefault();
-    const url = `http://localhost:9999/addCategory`;
+    const url = `https://intense-fjord-22962.herokuapp.com/addCategory`;
     fetch(url, {
       method: "POST",
       body: JSON.stringify(category),
@@ -18,7 +18,7 @@ const CategoryAdd = () => {
     })
       .then((res) => res.json())
       .then((result) =>{ 
-          if(result.acknowledged){
+          if(result){
               history.push("/category")
           }
           console.log(result);

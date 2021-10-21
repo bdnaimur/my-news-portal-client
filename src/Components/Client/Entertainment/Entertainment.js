@@ -3,7 +3,7 @@ import EntertainmentSingle from "./EntertainmentSingle";
 const Entertainment = () => {
   const [entertainment, setEntertainment] = useState([]);
   useEffect(() => {
-    fetch("https://intense-fjord-22962.herokuapp.com/posts")
+    fetch("http://localhost:9999/posts")
       .then((res) => res.json())
       .then((data) => {
         if (data) {

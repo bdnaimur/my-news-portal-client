@@ -8,7 +8,7 @@ const Categoryupdate = () => {
 
   const [catData, setCatData] = useState([]);
   useEffect(() => {
-    fetch(`https://intense-fjord-22962.herokuapp.com/categories/${catId}`)
+    fetch(`http://localhost:9999/categories/${catId}`)
       .then((res) => res.json())
       .then((data) => {
         setCatData(data);
@@ -17,7 +17,7 @@ const Categoryupdate = () => {
 
   const hadnleCategoryUpdate = (e) => {
     e.preventDefault();
-    fetch(`https://intense-fjord-22962.herokuapp.com/updateCategory/${catId}`, {
+    fetch(`http://localhost:9999/updateCategory/${catId}`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(updateData),

@@ -5,57 +5,60 @@ import PostItem from './PostItem';
 import SliderShow from "./SliderShow";
 const Home = () => {
   const [postData, setPostData] = useState([]);
-   const sliderShowArray = postData.slice(0,4);
+  const sliderShowArray = postData.slice(0, 4);
   useEffect(() => {
-    fetch("https://intense-fjord-22962.herokuapp.com/posts")
+    fetch("http://localhost:9999/posts")
       .then((res) => res.json())
       .then((data) => {
         setPostData(data.reverse());
       })
   }, []);
-     // pagination
-   const [pageNumber, setPageNumber] = useState(0);
-   const usersPerPage = 5;
-   const pagesVisited = pageNumber * usersPerPage;
-   const displayUsers = postData
-     .slice(pagesVisited, pagesVisited + usersPerPage)
-     .map((post) => {
-       return (
-        <PostItem post = {post}></PostItem>
-       );
-     });
- 
-   const pageCount = Math.ceil(postData.length / usersPerPage);
-   const changePage = ({ selected }) => {
-     setPageNumber(selected);
-   };
- 
+  // pagination
+  const [pageNumber, setPageNumber] = useState(0);
+  const usersPerPage = 5;
+  const pagesVisited = pageNumber * usersPerPage;
+  const displayUsers = postData
+    .slice(pagesVisited, pagesVisited + usersPerPage)
+    .map((post) => {
+      return (
+        <PostItem post={post}></PostItem>
+      );
+    });
+
+  const pageCount = Math.ceil(postData.length / usersPerPage);
+  const changePage = ({ selected }) => {
+    setPageNumber(selected);
+  };
+
   return (
     <div id="main-content">
+      {postData.length && <SliderShow postData={sliderShowArray} />}
       <div class="container">
         <div class="row">
-        <div class="offset-md-2 col-md-8">
-          {postData.length && <SliderShow postData={sliderShowArray}/>}
-        </div>
+          <div class="col-md-12">
+            
+          </div>
         </div>
         <div class="row">
-          <div class="col-md-8">
+          <div class="col-md-8 ">
             {/* <!-- post-container --> */}
             <div class="post-container">
               {displayUsers}
-              <ReactPaginate
-              previousLabel={"Prev"}
-              nextLabel={"Next"}
-              pageCount={pageCount}
-              onPageChange={changePage}
-              containerClassName={"paginationBttns"}
-              previousLinkClassName={"previousBttn"}
-              nextLinkClassName={"nextBttn"}
-              disabledClassName={"paginationDisabled"}
-              activeClassName={"paginationActive"}
-            />
+              <div className="mx-auto">
+              <ReactPaginate style={{"width":"100%"}}
+                previousLabel={"Prev"}
+                nextLabel={"Next"}
+                pageCount={pageCount}
+                onPageChange={changePage}
+                containerClassName={"paginationBttns"}
+                previousLinkClassName={"previousBttn"}
+                nextLinkClassName={"nextBttn"}
+                disabledClassName={"paginationDisabled"}
+                activeClassName={"paginationActive"}
+              />
+              </div>
             </div>
-            
+
             {/* <!-- /post-container --> */}
           </div>
           <Sidebar postData={postData} />

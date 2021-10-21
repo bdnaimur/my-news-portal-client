@@ -13,7 +13,7 @@ const Category = () => {
   const [categoryName, setCategoryName] = useState([]);
   console.log(categoryName);
   useEffect(() => {
-    fetch("https://intense-fjord-22962.herokuapp.com/categories")
+    fetch("http://localhost:9999/categories")
       .then((res) => res.json())
       .then((data) => {
         setCatData(data.reverse());
@@ -23,7 +23,7 @@ const Category = () => {
 
   useEffect(() => {
     const array = [];
-    fetch("https://intense-fjord-22962.herokuapp.com/posts")
+    fetch("http://localhost:9999/posts")
       .then((res) => res.json())
       .then((data) => {
         data.forEach((item) => {
@@ -36,7 +36,7 @@ const Category = () => {
   // delete action
   const handleCategoryDelete = (id) => {
     let deleteCount = catData.length + 1;
-    fetch(`https://intense-fjord-22962.herokuapp.com/deleteCategory/${id}`, {
+    fetch(`http://localhost:9999/deleteCategory/${id}`, {
       method: "DELETE",
     }).then((result) => {
       if (result) {

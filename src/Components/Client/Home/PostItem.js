@@ -38,7 +38,7 @@ const PostItem = ({post}) => {
                         {descriptionLength} ...
                       </p>
                       <Link to={`/postDetails/${post._id}`}>
-                          <button class="read-more pull-right" >
+                          <button class="read-more pull-right btn btn-warning" >
                             read more
                         </button>
                       </Link>

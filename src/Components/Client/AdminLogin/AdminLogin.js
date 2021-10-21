@@ -21,7 +21,7 @@ const AdminLogin = () => {
     const agentPassword = userData.filter(singleUserName => adminLogin.normalUserPassword===singleUserName.password);
 
     useEffect(()=>{
-      fetch(`https://intense-fjord-22962.herokuapp.com/users`) 
+      fetch(`http://localhost:9999/users`) 
       .then(res => res.json())
       .then(data => setUserData(data));
     },[])

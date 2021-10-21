@@ -13,7 +13,7 @@ const HeaderClient = () => {
         <div class="row">
             {/* <!-- LOGO --> */}
             <div class=" col-md-offset-4 col-md-4">
-            <Link to="/home" id="logo"><img src={logo} alt="logo"/></Link>
+            <Link to="/home" id="logo"><img width="50px" height="40px" src={logo} alt="logo"/></Link>
             </div>
             {/* <!-- /LOGO --> */}
         </div>

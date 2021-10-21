@@ -14,7 +14,7 @@ console.log(updateData);
   const [userData, setUserData] = useState([]);
   console.log(userData);
   useEffect(() => {
-    fetch(`https://intense-fjord-22962.herokuapp.com/users/${userId}`)
+    fetch(`http://localhost:9999/users/${userId}`)
       .then((res) => res.json())
       .then((data) => {
         setUserData(data);
@@ -23,7 +23,7 @@ console.log(updateData);
 
   const hadnleUserUpdate = (e) => {
     e.preventDefault();
-    fetch(`https://intense-fjord-22962.herokuapp.com/updateUser/${userId}`, {
+    fetch(`http://localhost:9999/updateUser/${userId}`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(updateData),

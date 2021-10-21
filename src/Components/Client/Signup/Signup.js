@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useHistory, useLocation } from "react-router-dom";
 // import firebaseConfig from '../Login1/firebase.config'
 import { userContext } from "../Client";
+import FireBaseLogin from "../AdminLogin/FireBaseLogin";
 // import firebaseConfig from '../Login1/firebase.config';
 // if (firebase.apps.length === 0) {
 //     firebase.initializeApp(firebaseConfig);
@@ -73,7 +74,7 @@ const Signup = () => {
       const userSignInfo = { ...user };
       userSignInfo[e.target.name] = e.target.value;
       setUser(userSignInfo);
-      setLoggedInUser({...loggedInUser, ...userSignInfo});
+      setLoggedInUser({ ...loggedInUser, ...userSignInfo });
     }
   };
   console.log(loggedInUser);
@@ -83,65 +84,65 @@ const Signup = () => {
       {user.error && (
         <h6 style={{ color: "red", textAlign: "center" }}>{user.error}</h6>
       )}
-      <div className="offset-md-3 col-md-6">
-      <h3>Create an account</h3>
-      <form onSubmit={hanldeCreateSubmit} className="form-style">
-        <div class="form-group">
-          <label>Name</label>
-          <input
-            onBlur={handleBlur}
-            type="text"
-            name="displayName"
-            id=""
-            class="form-control"
-            placeholder="Name"
-            required
-          />
-        </div>
-        <div class="form-group">
-          <label>Email</label>
-          <input
-            onBlur={handleBlur}
-            type="email"
-            name="email"
-            id="inputEmail4"
-            class="form-control"
-            placeholder="Email"
-            required
-          />
-        </div>
-        <div class="form-group">
-          <label>Password</label>
-          <input
-            onBlur={handleBlur}
-            type="password"
-            name="password"
-            class="form-control"
-            id=""
-            placeholder="Password"
-            required
-          />
-        </div>
-        <div class="form-group">
-          <label>Re Password</label>
-          <input
-            onBlur={handleBlur}
-            type="password"
-            name="repassword"
-            id=""
-            class="form-control"
-            placeholder="Confirm Password"
-            required
-          />
-        </div>
-        <br/>
-        <input className="btn btn-primary" type="submit" value="Sign Up" />
-      </form>
+      <div className="mt-3 offset-md-3 col-md-6">
+        <h3 className="text-center">Create an account</h3>
+        <form onSubmit={hanldeCreateSubmit} className="form-style">
+          <div class="form-group">
+            <label>Name</label>
+            <input
+              onBlur={handleBlur}
+              type="text"
+              name="displayName"
+              id=""
+              class="form-control"
+              placeholder="Name"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input
+              onBlur={handleBlur}
+              type="email"
+              name="email"
+              id="inputEmail4"
+              class="form-control"
+              placeholder="Email"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label>Password</label>
+            <input
+              onBlur={handleBlur}
+              type="password"
+              name="password"
+              class="form-control"
+              id=""
+              placeholder="Password"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label>Re Password</label>
+            <input
+              onBlur={handleBlur}
+              type="password"
+              name="repassword"
+              id=""
+              class="form-control"
+              placeholder="Confirm Password"
+              required
+            />
+          </div>
+          <br />
+          <input className="btn btn-primary" type="submit" value="Sign Up" />
+        </form>
       </div>
       <p className="text-center">
         <small>
           Already have an account?{" "}
-          <Link to="/signin">
+          <Link to="/adminLogin">
             <span>
               <strong>Login</strong>
             </span>
@@ -149,7 +150,9 @@ const Signup = () => {
         </small>
       </p>
 
-      <div className="social-signin">
+      <div className="offset-md-3 col-md-6 social-signin">
+        <FireBaseLogin />
+
         {/* <br />
                 <p>or</p> */}
         {/* <button onClick={googleSignin} className='btn btn-light w-100'><FontAwesomeIcon className="icon1" icon={["fab", "facebook"]} /> Continue with Facebook</button> */}

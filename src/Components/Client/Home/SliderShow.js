@@ -6,6 +6,7 @@ import SwiperCore, {
 } from 'swiper/core';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import "swiper/swiper.min.css";
+import MarqueTitle from "./MarqueTitle";
 const SliderShow = ({ postData }) => {
     console.log(postData);
     SwiperCore.use([Pagination, Autoplay]);
@@ -13,14 +14,14 @@ const SliderShow = ({ postData }) => {
         <section >
             <div className="pb-4 text-center">
                 <Swiper spaceBetween={30} centeredSlides={false} autoplay={{
-                    "delay": 2500,
+                    "delay": 4500,
                     "disableOnInteraction": false
                 }} pagination={{
                     "clickable": true
                 }} className="mySwiper">
                     {postData.map(singleSlide => <SwiperSlide>
                         <a href="#" className="w-100 block h-100">
-                            <img style={{"width":"100%", "height":"400px" }} alt="covid 19 w-100" src={singleSlide.imgUrl} className="w-full object-cover" />
+                            <img style={{ "width": "100%", "height": "500px" }} alt="covid 19 w-100" src={singleSlide.imgUrl} className="w-full object-cover" />
                         </a>
                     </SwiperSlide>)}
                 </Swiper>

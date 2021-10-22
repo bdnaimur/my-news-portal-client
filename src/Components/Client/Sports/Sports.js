@@ -4,7 +4,7 @@ import SportsSingle from './SportsSingle';
 const Sports = () => {
     const [sports, setSports] = useState([]);
   useEffect(() => {
-    fetch("http://localhost:9999/posts")
+    fetch("https://intense-fjord-22962.herokuapp.com/posts")
       .then((res) => res.json())
       .then((data) => {
         if (data) {

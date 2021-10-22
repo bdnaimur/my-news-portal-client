@@ -10,7 +10,7 @@ const Users = () => {
   let count = 0;
   console.log(userData);
   useEffect(() => {
-    fetch("http://localhost:9999/users")
+    fetch("https://intense-fjord-22962.herokuapp.com/users")
       .then((res) => res.json())
       .then((data) => {
         setUserData(data.reverse());
@@ -20,7 +20,7 @@ const Users = () => {
   // delete action
   const handleuserDelete = (id) => {
     let deleteCount = userData.length + 1;
-    fetch(`http://localhost:9999/deleteUser/${id}`, {
+    fetch(`https://intense-fjord-22962.herokuapp.com/deleteUser/${id}`, {
       method: "DELETE",
     }).then((result) => {
       if (result) {

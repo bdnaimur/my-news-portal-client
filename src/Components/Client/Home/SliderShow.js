@@ -14,7 +14,7 @@ const SliderShow = ({ postData }) => {
         <section >
             <div className="pb-4 text-center">
                 <Swiper spaceBetween={30} centeredSlides={false} autoplay={{
-                    "delay": 4500,
+                    "delay": 2500,
                     "disableOnInteraction": false
                 }} pagination={{
                     "clickable": true

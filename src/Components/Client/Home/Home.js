@@ -34,10 +34,13 @@ const Home = () => {
   return (
     postData.length ?
       <div id="main-content">
+        <div className = "d-flex">
+        <span className="d-inline-block m-2 mt-0 mb-0 h-5 font-weight-bold text-danger">Breaking News :</span>
         <marquee width="100%" direction="right">
           <bold className="marque-font"><span className="marque-title">{postData[0].category}</span> {postData[0].title}</bold>
           <bold className="marque-font"><span className="marque-title">{postData[1].category}</span>  {postData[1].title}</bold>
         </marquee>
+        </div>
         {postData.length && <SliderShow postData={sliderShowArray} />}
         <div class="container">
           <div class="row">

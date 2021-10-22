@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const SidebarPost = ({post}) => {
     return (
@@ -14,9 +15,11 @@ const SidebarPost = ({post}) => {
                 </span>
                 <span>
                     <i class="fa fa-calendar" aria-hidden="true"></i>
-                    01 Nov, 2021
+                    {post.date}
                 </span>
-                <a class="read-more" href="single.php">read more</a>
+                <Link to={`/postDetails/${post._id}`}>
+                <a class="read-more bg-warning" href="">read more</a>
+                </Link>
             </div>
         </div>
     );

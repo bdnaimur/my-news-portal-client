@@ -601,6 +601,22 @@ span.marque-title {
 .center{
   text-align: center;
 }
+.span.breaking-news {
+    /* margin-left: 20px; */
+    background: #f8d4a4;
+    text-align: center;
+    color: red;
+    border-radius: 5px;
+    font-weight: 800;
+}
+span.breaking-news {
+  /* margin-left: 20px; */
+  background: #f8d4a4;
+  text-align: center;
+  color: red;
+  border-radius: 5px;
+  font-weight: 800;
+}
 .spinner{
   font-size: 30px;
   height: 200px;

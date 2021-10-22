@@ -7,7 +7,9 @@ import 'firebase/compat/firestore';
 import { userContext } from '../Client';
 import { useContext } from 'react';
 import { useHistory } from 'react-router';
-// import { FaGoogle } from 'react-icon/fa';
+import { FaGoogle } from 'react-icons/fa';
+
+
 
 if (!firebase.apps.length) {
     firebase.initializeApp(firebaseConfig);
@@ -49,7 +51,7 @@ const FireBaseLogin = () => {
 
     return (
         <div>
-            <button className="btn btn-danger w-100 mb-4" onClick={signWithGoogle}>Google</button>
+            <button className="btn btn-danger w-100 mb-4" onClick={signWithGoogle}><FaGoogle/> Sign In</button>
         </div>
     );
 };

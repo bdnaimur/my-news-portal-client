@@ -16,7 +16,7 @@ const Home = () => {
   }, []);
   // pagination
   const [pageNumber, setPageNumber] = useState(0);
-  const usersPerPage = 5;
+  const usersPerPage = 4;
   const pagesVisited = pageNumber * usersPerPage;
   const displayUsers = postData
     .slice(pagesVisited, pagesVisited + usersPerPage)
@@ -35,11 +35,14 @@ const Home = () => {
     postData.length ?
       <div id="main-content">
         <div className = "d-flex">
-        <span className="d-inline-block m-2 mt-0 mb-0 h-5 font-weight-bold text-danger">Breaking News :</span>
+        <span className="breaking-news">Breaking News</span>
+        {postData.length>2 &&
         <marquee width="100%" direction="right">
-          <bold className="marque-font"><span className="marque-title">{postData[0].category}</span> {postData[0].title}</bold>
-          <bold className="marque-font"><span className="marque-title">{postData[1].category}</span>  {postData[1].title}</bold>
-        </marquee>
+        <bold className="marque-font"><span className="marque-title">{postData[0].category}</span> {postData[0].title}</bold>
+        <bold className="marque-font"><span className="marque-title">{postData[1].category}</span>  {postData[1].title}</bold>
+        <bold className="marque-font"><span className="marque-title">{postData[2].category}</span>  {postData[2].title}</bold>
+      </marquee>
+        }
         </div>
         {postData.length && <SliderShow postData={sliderShowArray} />}
         <div class="container">

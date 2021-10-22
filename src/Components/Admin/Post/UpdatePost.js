@@ -25,14 +25,14 @@ console.log(updateData);
   }
   // cateory fetch
   useEffect(() => {
-    fetch("https://intense-fjord-22962.herokuapp.com/categories")
+    fetch("https://frozen-temple-20129.herokuapp.com/categories")
       .then((res) => res.json())
       .then((data) => {
         setCatData(data);
       });
   }, []);
   useEffect(() => {
-    fetch(`https://intense-fjord-22962.herokuapp.com/posts/${postId}`)
+    fetch(`https://frozen-temple-20129.herokuapp.com/posts/${postId}`)
       .then((res) => res.json())
       .then((data) => {
         setPostData(data);
@@ -42,7 +42,7 @@ console.log(updateData);
   const hadnlePostUpdate = (e) => {
     e.preventDefault();
     const allData = { ...updateData, imgUrl: imageURL};
-    fetch(`https://intense-fjord-22962.herokuapp.com/updatePost/${postId}`, {
+    fetch(`https://frozen-temple-20129.herokuapp.com/updatePost/${postId}`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(allData),

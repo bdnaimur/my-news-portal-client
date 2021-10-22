@@ -8,7 +8,7 @@ const CategoryAdd = () => {
   });
   const handleCateorySubmit = (e) => {
     e.preventDefault();
-    const url = `https://intense-fjord-22962.herokuapp.com/addCategory`;
+    const url = `https://frozen-temple-20129.herokuapp.com/addCategory`;
     fetch(url, {
       method: "POST",
       body: JSON.stringify(category),

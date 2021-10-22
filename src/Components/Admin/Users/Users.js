@@ -10,7 +10,7 @@ const Users = () => {
   let count = 0;
   console.log(userData);
   useEffect(() => {
-    fetch("https://intense-fjord-22962.herokuapp.com/users")
+    fetch("https://frozen-temple-20129.herokuapp.com/users")
       .then((res) => res.json())
       .then((data) => {
         setUserData(data.reverse());
@@ -20,7 +20,7 @@ const Users = () => {
   // delete action
   const handleuserDelete = (id) => {
     let deleteCount = userData.length + 1;
-    fetch(`https://intense-fjord-22962.herokuapp.com/deleteUser/${id}`, {
+    fetch(`https://frozen-temple-20129.herokuapp.com/deleteUser/${id}`, {
       method: "DELETE",
     }).then((result) => {
       if (result) {

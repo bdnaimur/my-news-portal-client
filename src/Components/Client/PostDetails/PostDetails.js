@@ -7,7 +7,7 @@ const PostDetails = () => {
     const[dataReceive, setDatareceive] = useState(false)
     console.log(postId,details);
     useEffect(() => {
-        const url = "https://intense-fjord-22962.herokuapp.com/posts";
+        const url = "https://frozen-temple-20129.herokuapp.com/posts";
         console.log(url);
         fetch(url)
             .then(res => res.json())

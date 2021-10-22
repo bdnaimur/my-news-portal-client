@@ -6,7 +6,7 @@ const AddUsers = () => {
     const [userData, setuserData] = useState({});
     const handleUserSubmit = e =>{
             e.preventDefault();
-            const url = `https://intense-fjord-22962.herokuapp.com/addUser`;
+            const url = `https://frozen-temple-20129.herokuapp.com/addUser`;
             fetch(url, {
               method: "POST",
               headers: {

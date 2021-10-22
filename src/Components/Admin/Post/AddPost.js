@@ -25,7 +25,7 @@ const AddPost = () => {
 
   // cateory fetch
   useEffect(() => {
-    fetch("https://intense-fjord-22962.herokuapp.com/categories")
+    fetch("https://frozen-temple-20129.herokuapp.com/categories")
       .then((res) => res.json())
       .then((data) => {
         setCatData(data);
@@ -37,7 +37,7 @@ const AddPost = () => {
     const date = new Date().toLocaleString();
     const allData = { ...postData, imgUrl: imageURL, date:date, userName: loggedInUser.userName, userId: loggedInUser.userId };
     console.log(allData);
-    const url = `https://intense-fjord-22962.herokuapp.com/addPost`;
+    const url = `https://frozen-temple-20129.herokuapp.com/addPost`;
     fetch(url, {
       method: "POST",
       headers: {

@@ -4,7 +4,7 @@ import InternationalSingle from './InternationalSingle';
 const International = () => {
     const [international, setInternational] = useState([]);
   useEffect(() => {
-    fetch("https://intense-fjord-22962.herokuapp.com/posts")
+    fetch("https://frozen-temple-20129.herokuapp.com/posts")
       .then((res) => res.json())
       .then((data) => {
         if (data) {

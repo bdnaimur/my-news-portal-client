@@ -14,6 +14,10 @@ import FireBaseLogin from "../AdminLogin/FireBaseLogin";
 // }
 
 const Signup = () => {
+  const history = useHistory();
+  const location = useLocation();
+    let { from } = location.state || { from: { pathname: "/" } };
+    console.log(from);
   const [loggedInUser, setLoggedInUser] = useContext(userContext);
   // const history = useHistory();
   // const location = useLocation();
@@ -45,7 +49,12 @@ const Signup = () => {
 
   const hanldeCreateSubmit = (e) => {
     e.preventDefault();
-    console.log(user, loggedInUser);
+    if (loggedInUser && from) {
+      history.replace(from);
+  }
+  else if(loggedInUser) {
+      history.push('/admin');
+  }
     e.target.reset();
   };
 
@@ -84,6 +93,9 @@ const Signup = () => {
       {user.error && (
         <h6 style={{ color: "red", textAlign: "center" }}>{user.error}</h6>
       )}
+      <div className="mt-3 offset-md-4 col-md-4 social-signin">
+        <FireBaseLogin />
+      </div>
       <div className="mt-3 offset-md-3 col-md-6">
         <h3 className="text-center">Create an account</h3>
         <form onSubmit={hanldeCreateSubmit} className="form-style">
@@ -149,17 +161,6 @@ const Signup = () => {
           </Link>
         </small>
       </p>
-
-      <div className="offset-md-3 col-md-6 social-signin">
-        <FireBaseLogin />
-
-        {/* <br />
-                <p>or</p> */}
-        {/* <button onClick={googleSignin} className='btn btn-light w-100'><FontAwesomeIcon className="icon1" icon={["fab", "facebook"]} /> Continue with Facebook</button> */}
-        {/* <br />
-                <br />
-                <button onClick={facebookSignIn} className='btn btn-light w-100'><FontAwesomeIcon className="icon2" icon={["fab", "google"]} />Continue with Google</button> */}
-      </div>
     </div>
   );
 };

@@ -8,6 +8,7 @@ import { userContext } from '../Client';
 import { useContext } from 'react';
 import { useHistory } from 'react-router';
 import { FaGoogle } from 'react-icons/fa';
+import { useLocation } from 'react-router-dom';
 
 
 
@@ -17,8 +18,11 @@ if (!firebase.apps.length) {
 
 const FireBaseLogin = () => {
     const history = useHistory();
+    const location = useLocation();
+    let { from } = location.state || { from: { pathname: "/" } };
+    console.log(from);
     const [loggedInUser, setLoggedInUser] = useContext(userContext);
-    
+
     const provider = new GoogleAuthProvider();
     const signWithGoogle = () => {
 
@@ -30,10 +34,13 @@ const FireBaseLogin = () => {
                 const token = credential.accessToken;
                 // The signed-in user info.
                 const user = result.user;
-                console.log('loggedInUser',loggedInUser);
+                console.log('loggedInUser', loggedInUser);
                 setLoggedInUser(user);
-                console.log('After loggedInUser',loggedInUser);
-                if(user.email){
+                console.log('After loggedInUser', loggedInUser);
+                if (user.email && from) {
+                    history.replace(from);
+                }
+                else if(user.email) {
                     history.push('/admin');
                 }
                 // ...
@@ -51,7 +58,7 @@ const FireBaseLogin = () => {
 
     return (
         <div>
-            <button className="btn btn-danger w-100 mb-4" onClick={signWithGoogle}><FaGoogle/> Sign In</button>
+            <button className="btn btn-danger w-100 mb-4" onClick={signWithGoogle}><FaGoogle /> Sign In</button>
         </div>
     );
 };

@@ -9,7 +9,7 @@ const PrivateRouteInternational = ({ children, ...rest }) => {
           <Route
           {...rest}
           render={({ location }) =>
-          loggedInUser.adminLoggedin ? (
+          loggedInUser.adminLoggedin || loggedInUser.emailVerified? (
               children
             ) : (
               <Redirect
